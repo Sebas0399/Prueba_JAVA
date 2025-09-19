@@ -23,5 +23,5 @@
 # Ejecutar pruebas unitarias e integración
 ./mvnw test
 
-#levantar el docker
+# Levantar el docker
 docker-compose -f docker-compose.yml up --build
