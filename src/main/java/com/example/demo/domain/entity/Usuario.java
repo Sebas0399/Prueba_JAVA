@@ -1,9 +1,11 @@
 package com.example.demo.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,9 +23,8 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private  String nombre;
-    @Column(nullable = false)
     private String password;
-    @Column(unique = true,nullable = false)
+    @Column(unique = true)
     private String email;
     @OneToMany
     private List<Tarea> tareasLista;

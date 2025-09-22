@@ -4,6 +4,7 @@ import com.example.demo.application.dto.AuthenticationRequest;
 import com.example.demo.application.dto.AuthenticationResponse;
 import com.example.demo.application.dto.UsuarioDto;
 import com.example.demo.application.service.AuthenticationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authRequest){
+    public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody AuthenticationRequest authRequest){
         AuthenticationResponse jwtDto=authenticationService.login(authRequest);
         return ResponseEntity.ok(jwtDto);
     }

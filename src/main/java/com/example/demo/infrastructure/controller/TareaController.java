@@ -3,6 +3,7 @@ package com.example.demo.infrastructure.controller;
 import com.example.demo.application.dto.TareaDto;
 import com.example.demo.application.service.TareaService;
 import com.example.demo.domain.entity.Usuario;
+import jakarta.validation.Valid;
 import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,14 +23,11 @@ public class TareaController {
 
     // Crear tarea
     @PostMapping
-    public ResponseEntity<?> createTarea(@RequestBody TareaDto tareaDto) {
-        try {
+    public ResponseEntity<?> createTarea(@Valid @RequestBody  TareaDto tareaDto) {
+
             TareaDto created = tareaService.create(tareaDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(created);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(e.getMessage());
-        }
+
     }
 
     // Obtener todas las tareas de un usuario
@@ -64,7 +62,7 @@ public class TareaController {
 
     // Editar tarea
     @PutMapping("/{tareaId}")
-    public ResponseEntity<?> editTarea(@RequestBody TareaDto tareaDto, @PathVariable Integer tareaId) {
+    public ResponseEntity<?> editTarea(@Valid @RequestBody TareaDto tareaDto, @PathVariable Integer tareaId) {
         try {
             TareaDto updated = tareaService.edit(tareaDto, tareaId);
             return ResponseEntity.ok(updated);
